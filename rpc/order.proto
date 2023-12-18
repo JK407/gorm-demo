@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package order;
+option go_package="./order";
+
+message GetUserRequest {
+  string user_id = 1;
+}
+
+message UserRow {
+  int64 user_id = 1;
+  string user_name = 2;
+  string password = 3;
+  string email = 4;
+}
+
+message GetUserResponse {
+  int64 code = 1;
+  string msg = 2;
+  UserRow data = 3;
+}
+
+service OrderService {
+  rpc GetUser(GetUserRequest) returns(GetUserResponse);
+}

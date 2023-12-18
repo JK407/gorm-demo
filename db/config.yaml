@@ -1,0 +1,6 @@
+database:
+  host: 60.204.233.80
+  port: 3306
+  user: root
+  password: Password(l4m-?9C7
+  dbname: trans_demo

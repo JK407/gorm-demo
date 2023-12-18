@@ -1,0 +1,77 @@
+syntax = "v1"
+
+info (
+	title: "trans_order_api"
+	desc: "transaction_order_demo"
+	author: "JK407"
+	email: "1467511770@qq.com"
+)
+
+type (
+	UserOrderRequest {
+		UserId      int `json:"user_id"`
+		ProductId   int `json:"product_id"`
+		OrderAmount int `json:"order_amount"`
+		OrderId     int `json:"order_id"`
+		Action      int `json:"action"`
+	}
+
+	MultiOrderRequest {
+		UserId      []int `json:"user_id"`
+		ProductId   int   `json:"product_id"`
+		OrderAmount int   `json:"order_amount"`
+		Action      int   `json:"action"`
+	}
+
+	GetUserRequest {
+		UserId int `form:"user_id"`
+	}
+)
+
+type (
+	UserOrder {
+		OrderId       int `json:"order_id"`
+		UserId        int `json:"user_id"`
+		ProductId     int `json:"product_id"`
+		StockQuantity int `json:"stock_quantity"`
+		OrderTime     int `json:"order_time"`
+		OrderStaus    int `json:"order_status"`
+		OrderAmount   int `json:"order_amount"`
+	}
+	UserRow {
+		UserId   int    `json:"user_id"`
+		UserName string `json:"user_name"`
+		Password string `json:"password"`
+		Email    string `json:"email"`
+	}
+)
+
+type (
+	UserOrderResponse {
+		Code int       `json:"code"`
+		Msg  string    `json:"msg"`
+		Data UserOrder `json:"data"`
+	}
+
+	MultiOrderResponse {
+		Code int         `json:"code"`
+		Msg  string      `json:"msg"`
+		Data []UserOrder `json:"data"`
+	}
+	GetUserResponse {
+		Code int     `json:"code"`
+		Msg  string  `json:"msg"`
+		Data UserRow `json:"data"`
+	}
+)
+
+service orderApiService {
+	@handler UserOrder // 单个用户下单,单个用户取消订单
+	post /order/user (UserOrderRequest) returns(UserOrderResponse)
+
+	@handler MultiOrder // 多个用户下单,多个用户取消订单
+	post /order/multi (MultiOrderRequest) returns(MultiOrderResponse)
+
+	@handler GetUser // 获取用户信息
+	get /user (GetUserRequest) returns(GetUserResponse)
+}

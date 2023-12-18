@@ -1,0 +1,15 @@
+Name: order.rpc
+ListenOn: 0.0.0.0:8080
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: order.rpc
+
+
+Mysql:
+  DemoDSN: "root:Password(l4m-?9C7@tcp(60.204.233.80:3306)/trans_demo?charset=utf8&parseTime=True&loc=Local"
+
+#Redis:
+#  addr: 127.0.0.1:6379
+#  password:
+#  DB: 6
